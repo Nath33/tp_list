@@ -51,4 +51,10 @@ router.delete('/', (req, res, next) => {
   })
 })
 
+router.get('/',(req,res,next)=>{
+  return res.json({
+    data: courseListCollection
+  })
+})
+
 module.exports = router

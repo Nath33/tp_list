@@ -97,4 +97,16 @@ describe('CourselistController', () => {
     })
   })
 
+  describe('When I get all course lists (GET /course-lists', () => {
+    it('Should successfully show all course lists', () => {
+      return request(app)
+        .get('/course-lists')
+        .then((res) => {
+          res.status.should.equal(200)
+          expect(res.body.data).to.be.an('array')
+          res.body.data.length.should.be.eql(2)
+        })
+    })
+  })
+
 })
