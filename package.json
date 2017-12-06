@@ -1,19 +1,25 @@
 {
-  "name": "tp_list",
+  "name": "tp",
   "version": "1.0.0",
-  "description": "tp_list",
+  "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Nath33/tp_list.git"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "mocha ./test/**/*.spec.js",
+    "test:watch": "mocha -w ./test/**/*.spec.js --reporter dot"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Nath33/tp_list/issues"
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4"
   },
-  "homepage": "https://github.com/Nath33/tp_list#readme"
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.2",
+    "supertest": "^3.0.0"
+  }
 }
