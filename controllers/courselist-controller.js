@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
   }
 
   const newCourseList = {
-    id: uuid(),
+    id: courseListCollection.length + 1,
     name
   }
 
@@ -28,6 +28,26 @@ router.post('/', (req, res, next) => {
 
   res.json({
     data: newCourseList
+  })
+})
+
+router.delete('/', (req, res, next) => {
+  if (!req.body.id){
+    return next(new BadRequestError('VALIDATION', 'Missing id'))
+  }
+
+  const id = req.body.id
+
+  let position
+  for (let i=0; i< courseListCollection.length;i++) {
+    if(courseListCollection[i].id === id ) {
+      position = i
+    }
+  }
+  courseListCollection.splice(position, 1)
+
+  return res.json({
+    data: courseListCollection
   })
 })
 
