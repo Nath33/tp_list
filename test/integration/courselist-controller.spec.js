@@ -63,4 +63,38 @@ describe('CourselistController', () => {
     })
   })
 
+  describe('When I delete a course list (DELETE /course-lists)', () => {
+    it('Should reject a 400 when course list does not exist', () => {
+      return request(app)
+        .delete('/course-lists')
+        .then((res) => {
+          res.status.should.equal(400)
+          res.body.should.eql({
+            error: {
+              code: 'VALIDATION',
+              message: 'Missing id'
+            }
+          })
+        })
+    })
+    it('Should delete a list', () => {
+      let mockId
+      for (let i = 0; i < db.courseList.length; i++) {
+        if (db.courseList[i].name === 'Toto') {
+          mockId = db.courseList[i].id
+        }
+      }
+      return request(app)
+        .delete('/course-lists')
+        .send({ id: mockId })
+        .then((res) => {
+          res.status.should.equal(200)
+          expect(res.body.data).to.be.an('array')
+
+          const result = find(db.courseList, { id: mockId })
+          expect(result).to.be.undefined
+        })
+    })
+  })
+
 })
